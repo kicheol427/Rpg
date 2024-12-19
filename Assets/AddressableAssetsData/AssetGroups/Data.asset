@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Data
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Data
   m_Data:
     m_SerializedData: []
-  m_GUID: 244804d531cf5db4e95a52766a547a74
+  m_GUID: 0d6d6a952af914c4badbc782a8a7df46
   m_SerializeEntries:
-  - m_GUID: e79bbd6d8778921498acfdbd56aff4ba
-    m_Address: Player.prefab
+  - m_GUID: 9ad2661ef0454194c9e5eca486ea0a70
+    m_Address: PlayerData.xml
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
@@ -27,5 +27,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: af840e019e7cb2147802778ae5bc63aa, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 308b9517f5ad8d248a778082e1a19f9e, type: 2}
-    - {fileID: 11400000, guid: 19df2b0933007154f9f2cc8b8e7e8d94, type: 2}
+    - {fileID: 11400000, guid: 5bad915c6e28d284493b7a2b83c46b93, type: 2}
+    - {fileID: 11400000, guid: 7de232eb3a52d664dbe8f953b1a5d773, type: 2}

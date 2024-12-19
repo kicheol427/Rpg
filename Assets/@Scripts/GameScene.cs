@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class GameScene : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        Managers.Resource.LoadAllAsync<Object>("PreLoad", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key}{count}/{totalCount}");
+            if (count == totalCount)
+            {
+                StartLoaded();
+            }
+        });
     }
 
-    // Update is called once per frame
-    void Update()
+    SpawningPool _spawningPool;
+    void StartLoaded()
     {
-        
+        Managers.Data.Init();
+
+        var player = Managers.Object.Spawn<PlayerController>(Vector3.zero);
+
+        Camera.main.GetComponent<CameraController>().Target = player.gameObject;
     }
 }
