@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Utils
 {
+
 	public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
-	{
+	{//컴포넌트 get 확인 후 없으면 추가
 		T component = go.GetComponent<T>();
 		if (component == null)
 			component = go.AddComponent<T>();
@@ -13,7 +14,7 @@ public class Utils
 	}
 
 	public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
-	{
+	{//게임오브젝트에서 산하 오브젝트 찾기
 		Transform transform = FindChild<Transform>(go, name, recursive);
 		if (transform == null)
 			return null;

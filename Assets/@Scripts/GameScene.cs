@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class GameScene : MonoBehaviour
 {
+    public GameObject _playerPrefab;
+    public GameObject _joystickPrefab;
+
+    GameObject _player;
+    GameObject _joystick;
+
     void Start()
     {
-        Managers.Resource.LoadAllAsync<Object>("PreLoad", (key, count, totalCount) =>
-        {
-            Debug.Log($"{key}{count}/{totalCount}");
-            if (count == totalCount)
-            {
-                StartLoaded();
-            }
-        });
+        _player = GameObject.Instantiate(_playerPrefab);
+        _joystickPrefab = GameObject.Instantiate(_joystickPrefab);
+
+        GameObject go = new GameObject("@Player");
+        _player.transform.parent = go.transform;
+
+        _player.AddComponent<PlayerController>();
+        
+
+
     }
 
-    SpawningPool _spawningPool;
-    void StartLoaded()
+    void Update()
     {
-        Managers.Data.Init();
-
-        var player = Managers.Object.Spawn<PlayerController>(Vector3.zero);
-
-        Camera.main.GetComponent<CameraController>().Target = player.gameObject;
+        
     }
 }
