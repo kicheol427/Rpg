@@ -38,4 +38,21 @@ public class PlayerController : CreatureController
         transform.position += dir;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)//데미지 설계
+    {
+        MonsterController target = collision.gameObject.GetComponent<MonsterController>();
+        if (target == null)
+            return;
+
+    }
+    public override void OnDamaged(BaseController attacker, int damage)
+    {
+        base.OnDamaged(attacker, damage);
+
+        Debug.Log($"OnDamaged ! {Hp}");
+
+        // TEMP 반사뎀.수정필요
+        CreatureController cc = attacker as CreatureController;
+        cc?.OnDamaged(this, 10000);
+    }
 }

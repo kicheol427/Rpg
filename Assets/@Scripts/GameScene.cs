@@ -30,8 +30,14 @@ public class GameScene : MonoBehaviour
 
     void StartLoaded()
     {
-        var player = Managers.Resource.Instantiate("Player.prefab");
-        player.AddComponent<PlayerController>();
+        var player = Managers.Object.Spawn<PlayerController>();
+
+        for(int i = 0;i < 10;i++)//TODO:: ¼ÒÈ¯ µô·¹ÀÌ 
+        {
+            MonsterController mc = Managers.Object.Spawn<MonsterController>(Random.Range(0, 2));
+            mc.transform.position = new Vector2(Random.Range(-5, 5), Random.Range(-5, 5));
+        }
+
 
         var joystick = Managers.Resource.Instantiate("UI_Joystick.prefab");
         joystick.name = "@UI_Joystick";
