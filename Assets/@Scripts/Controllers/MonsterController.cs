@@ -70,7 +70,7 @@ public class MonsterController : CreatureController
 			StopCoroutine(_coDotDamage);
 		_coDotDamage = null;
 
-		//GemController gc = Managers.Object.Spawn<GemController>(transform.position); 드랍 설계
+		GemController gc = Managers.Object.Spawn<GemController>(transform.position); //드랍 설계
 
 		Managers.Object.Despawn(this);//오브젝트 삭제
 	}
