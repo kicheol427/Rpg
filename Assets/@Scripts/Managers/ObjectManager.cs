@@ -67,7 +67,7 @@ public class ObjectManager
 			Sprite sprite = Managers.Resource.Load<Sprite>(key);
 			go.GetComponent<SpriteRenderer>().sprite = sprite;
 
-			//GameObject.Find("@Grid").GetComponent<GridController>().Add(go);
+			GameObject.Find("@Grid").GetComponent<GridController>().Add(go);
 
 			return gc as T;
 		}
@@ -96,7 +96,7 @@ public class ObjectManager
 			Gems.Remove(obj as GemController);
 			Managers.Resource.Destroy(obj.gameObject);
 
-			//GameObject.Find("@Grid").GetComponent<GridController>().Remove(obj.gameObject);
+			GameObject.Find("@Grid").GetComponent<GridController>().Remove(obj.gameObject);
 		}
 	}
 

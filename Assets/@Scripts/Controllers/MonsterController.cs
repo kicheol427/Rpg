@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class MonsterController : CreatureController
 {
@@ -16,7 +17,6 @@ public class MonsterController : CreatureController
 		return true;
 	}
 
-	// Update is called once per frame
 	void FixedUpdate()
     {
 		PlayerController pc = Managers.Object.Player;
@@ -64,7 +64,7 @@ public class MonsterController : CreatureController
 	{
 		base.OnDead();
 
-		//Managers.Game.KillCount++; 킬 대신 돈으로 변경
+		Managers.Game.KillCount++; //킬 대신 돈으로 변경
 
 		if (_coDotDamage != null)
 			StopCoroutine(_coDotDamage);

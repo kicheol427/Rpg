@@ -5,17 +5,54 @@ using UnityEngine;
 
 public class GameManager
 {
-    Vector2 _moveDir;
+	public PlayerController Player { get { return Managers.Object?.Player; } }
 
-    public event Action<Vector2> OnMoveDirChanged;
+	#region 재화
 
-    public Vector2 MoveDir
-    {
-        get { return _moveDir; }
-        set
-        {
-            _moveDir = value;
-            OnMoveDirChanged?.Invoke(_moveDir);
-        }
-    }
+	public int Gold { get; set; }
+
+	int _gem = 0;
+
+	public event Action<int> OnGemCountChanged;
+	public int Gem
+	{
+		get { return _gem; }
+		set
+		{
+			_gem = value;
+			OnGemCountChanged?.Invoke(value);
+		}
+	}
+
+	#endregion
+
+	#region 전투
+	int _killCount;
+	public event Action<int> OnKillCountChanged;
+
+	public int KillCount
+	{
+		get { return _killCount; }
+		set
+		{
+			_killCount = value; OnKillCountChanged?.Invoke(value);
+		}
+	}
+	#endregion
+
+	#region 이동
+	Vector2 _moveDir;
+
+	public event Action<Vector2> OnMoveDirChanged;
+
+	public Vector2 MoveDir
+	{
+		get { return _moveDir; }
+		set
+		{
+			_moveDir = value;
+			OnMoveDirChanged?.Invoke(_moveDir);
+		}
+	}
+	#endregion
 }
