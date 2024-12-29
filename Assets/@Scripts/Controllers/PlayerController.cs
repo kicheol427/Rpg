@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerController : CreatureController
 {
     Vector2 _moveDir = Vector2.zero;
-    float _speed = 5f;
 
     float EnvCollectDist { get; set; } = 1.0f;
 
@@ -16,9 +15,15 @@ public class PlayerController : CreatureController
         set { _moveDir = value.normalized; }
     }
 
-    void Start()
+    public override bool Init()
     {
+        if(base.Init() == false) return false;
+        _speed = 5f;
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
+
+        StartProjectile();
+
+        return true;
     }
     void OnDestroy()
     {
@@ -96,4 +101,47 @@ public class PlayerController : CreatureController
         CreatureController cc = attacker as CreatureController;
         cc?.OnDamaged(this, 10000);
     }
+
+    #region FireProjectile
+
+    Coroutine _coFireProjectile;
+
+    void StartProjectile()
+    {
+        if (_coFireProjectile != null)
+            StopCoroutine(_coFireProjectile);
+
+        _coFireProjectile = StartCoroutine(CoStartProjectile());
+        
+    }
+
+    IEnumerator CoStartProjectile()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.5f);//시간 data 시트 참조
+
+        while (true)
+        {
+            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(_fireSocket.position, 1);
+            pc.SetInfo(1, this, (_fireSocket.position - _indicator.position).normalized);
+
+            yield return wait;
+        }
+    }
+
+    #endregion
+
+    #region EgoSword
+    EgoSword _egoSword;
+    void StartEgoSword()
+    {
+        if (_egoSword.IsValid())
+            return;
+
+        _egoSword = Managers.Object.Spawn<EgoSword>(_indicator.position, Define.EGO_SWORD_ID);
+        _egoSword.transform.SetParent(_indicator);
+
+        _egoSword.ActivateSkill();
+    }
+
+    #endregion
 }

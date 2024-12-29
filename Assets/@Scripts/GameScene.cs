@@ -31,6 +31,7 @@ public class GameScene : MonoBehaviour
     SpawningPool _spawningPool;
     void StartLoaded()
     {
+        Managers.Data.Init();
 
         _spawningPool = gameObject.AddComponent<SpawningPool>();
 
@@ -52,7 +53,6 @@ public class GameScene : MonoBehaviour
 
         Camera.main.GetComponent<CameraController>().Target = player.gameObject;
 
-        Managers.Data.Init();
         
         foreach (var playerData in Managers.Data.PlayerDic.Values)
         {

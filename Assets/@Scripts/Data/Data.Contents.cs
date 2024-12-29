@@ -94,8 +94,6 @@ namespace Data
 		[XmlAttribute]
 		public int damage;
 
-		//[XmlElement("HitEffect")]
-		//public List<HitEffect> hitEffects = new List<HitEffect>();
 	}
 
 	[Serializable, XmlRoot("SkillDatas")]
