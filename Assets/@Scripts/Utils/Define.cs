@@ -42,12 +42,15 @@ public static class Define
 		Melee,
 		Projectile,
 		Etc,
+		Sequence,
+		Repeat,
 	}
 
 	public enum StageType
 	{
 		Normal,
 		Boss,
+		Home,
 	}
 	public enum CreatureState
 	{

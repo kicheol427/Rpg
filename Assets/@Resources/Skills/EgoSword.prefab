@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1681808170223585277
 Transform:
   m_ObjectHideFlags: 0
@@ -9840,7 +9840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5469834221276245073
 Transform:
   m_ObjectHideFlags: 0
@@ -14767,7 +14767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7815593366314758789
 Transform:
   m_ObjectHideFlags: 0
@@ -24582,6 +24582,7 @@ GameObject:
   - component: {fileID: 3879975523637581710}
   - component: {fileID: 4152181725643790294}
   - component: {fileID: 4275180597620909992}
+  - component: {fileID: -2386705924136447801}
   m_Layer: 8
   m_Name: EgoSword
   m_TagString: Weapon
@@ -24687,6 +24688,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-2386705924136447801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217842100069291762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c50942ecf4f9ec4c95866d6e82ab7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swingParticles:
+  - {fileID: 1681808170223585276}
+  - {fileID: 6985662887103722227}
+  - {fileID: 2805518476969034538}
+  - {fileID: 7808535720102256075}
 --- !u!1 &6478390955051475138
 GameObject:
   m_ObjectHideFlags: 0
@@ -29593,7 +29611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4727705145483031322
 Transform:
   m_ObjectHideFlags: 0

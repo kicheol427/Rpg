@@ -20,7 +20,7 @@ public class GameManager
 		set
 		{
 			_gem = value;
-			OnGemCountChanged?.Invoke(value);
+			OnGemCountChanged?.Invoke(value);//Áª °»½ÅÄÚµå->Àç·áorµ·
 		}
 	}
 

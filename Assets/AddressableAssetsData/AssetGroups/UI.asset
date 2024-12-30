@@ -23,6 +23,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34d73d78dbfbb80409d0d3a0424f390d
+    m_Address: UI_GameScene.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e728b8f94850d645a928f6aff91d264
+    m_Address: UI_SkillCardItem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25c7794bc379c264b84571b83b7f6aa6
+    m_Address: UI_SkillSelectPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: af840e019e7cb2147802778ae5bc63aa, type: 2}
   m_SchemaSet:

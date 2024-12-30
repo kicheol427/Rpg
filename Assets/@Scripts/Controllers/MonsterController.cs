@@ -5,20 +5,68 @@ using static UnityEngine.GraphicsBuffer;
 
 public class MonsterController : CreatureController
 {
-	public override bool Init()
+    #region State Pattern
+
+    Define.CreatureState _creatureState = Define.CreatureState.Moving;
+    public virtual Define.CreatureState CreatureState
+    {
+        get { return _creatureState; }
+        set
+        {
+            _creatureState = value;
+            UpdateAnimation();
+        }
+    }
+
+    protected Animator _animator;
+    public virtual void UpdateAnimation()
+    {
+
+    }
+
+    public override void UpdateController()
+    {
+        base.UpdateController();
+
+        switch (CreatureState)
+        {
+            case Define.CreatureState.Idle:
+                UpdateIdle();
+                break;
+            case Define.CreatureState.Skill:
+                UpdateSkill();
+                break;
+            case Define.CreatureState.Moving:
+                UpdateMoving();
+                break;
+            case Define.CreatureState.Dead:
+                UpdateDead();
+                break;
+        }
+    }
+
+    protected virtual void UpdateIdle() { }
+    protected virtual void UpdateSkill() { }
+    protected virtual void UpdateMoving() { }
+    protected virtual void UpdateDead() { }
+
+    #endregion
+    public override bool Init()
 	{
 		if (base.Init())
 			return false;
 
-		//_animator = GetComponent<Animator>();
+		_animator = GetComponent<Animator>();
 		ObjectType = Define.ObjectType.Monster;
-		//CreatureState = Define.CreatureState.Moving;
+		CreatureState = Define.CreatureState.Moving;
 
 		return true;
 	}
 
 	void FixedUpdate()
     {
+		if (CreatureState != Define.CreatureState.Moving)//state가 moving일때 이쪽으로 들어옴
+			return;
 		PlayerController pc = Managers.Object.Player;
 		if (pc == null)
 			return;

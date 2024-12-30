@@ -9,6 +9,15 @@ public class PlayerController : CreatureController
 
     float EnvCollectDist { get; set; } = 1.0f;
 
+    [SerializeField]
+    Transform _indicator;
+    [SerializeField]
+    Transform _fireSocket;
+
+    public Transform Indicator { get { return _indicator; } }
+    public Vector3 FireSocket { get { return _fireSocket.position; } }
+    public Vector3 ShootDir { get { return (_fireSocket.position - _indicator.position).normalized;} }
+
     public Vector2 vector2
     {
         get { return _moveDir; }
@@ -21,7 +30,8 @@ public class PlayerController : CreatureController
         _speed = 5f;
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
 
-        StartProjectile();
+        //StartProjectile();
+        //StartEgoSword();
 
         return true;
     }
@@ -45,6 +55,12 @@ public class PlayerController : CreatureController
     {
         Vector3 dir = _moveDir * _speed * Time.deltaTime; ;
         transform.position += dir;
+
+        if (_moveDir != Vector2.zero)
+        {
+            _indicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI);
+        }
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     /*void CollectEnv()
@@ -76,12 +92,10 @@ public class PlayerController : CreatureController
             if (dir.sqrMagnitude <= sqrCollectDist)
             {
                 Managers.Game.Gem += 1;
-
+                //ui갱신
                 Managers.Object.Despawn(gem);
             }
         }
-
-        Debug.Log($"SearchGems({findGems.Count}) TotalGems({gems.Count})");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)//데미지 설계
@@ -101,47 +115,4 @@ public class PlayerController : CreatureController
         CreatureController cc = attacker as CreatureController;
         cc?.OnDamaged(this, 10000);
     }
-
-    #region FireProjectile
-
-    Coroutine _coFireProjectile;
-
-    void StartProjectile()
-    {
-        if (_coFireProjectile != null)
-            StopCoroutine(_coFireProjectile);
-
-        _coFireProjectile = StartCoroutine(CoStartProjectile());
-        
-    }
-
-    IEnumerator CoStartProjectile()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.5f);//시간 data 시트 참조
-
-        while (true)
-        {
-            ProjectileController pc = Managers.Object.Spawn<ProjectileController>(_fireSocket.position, 1);
-            pc.SetInfo(1, this, (_fireSocket.position - _indicator.position).normalized);
-
-            yield return wait;
-        }
-    }
-
-    #endregion
-
-    #region EgoSword
-    EgoSword _egoSword;
-    void StartEgoSword()
-    {
-        if (_egoSword.IsValid())
-            return;
-
-        _egoSword = Managers.Object.Spawn<EgoSword>(_indicator.position, Define.EGO_SWORD_ID);
-        _egoSword.transform.SetParent(_indicator);
-
-        _egoSword.ActivateSkill();
-    }
-
-    #endregion
 }

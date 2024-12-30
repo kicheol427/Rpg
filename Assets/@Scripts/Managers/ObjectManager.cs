@@ -29,9 +29,9 @@ public class ObjectManager
 		}
 		else if (type == typeof(MonsterController))
 		{
-			//string name = "";
+			string name = "";
 
-			/*switch (templateID)
+			switch (templateID)
 			{
 				case Define.GOBLIN_ID:
 					name = "Goblin_01";
@@ -42,9 +42,8 @@ public class ObjectManager
 				case Define.BOSS_ID:
 					name = "Boss_01";
 					break;
-			};*/
+			};
 
-			string name = (templateID == 0 ? "Goblin_01" : "Snake_01");
 			GameObject go = Managers.Resource.Instantiate(name + ".prefab", pooling: true);
 			go.transform.position = position;
 
@@ -82,13 +81,29 @@ public class ObjectManager
 
 			return pc as T;
         }
+		else if (typeof(T).IsSubclassOf(typeof(RepeatSkill)))
+		{
+			if (Managers.Data.SkillDic.TryGetValue(templateID, out Data.SkillData skillData) == false)
+			{
+				Debug.LogError($"ObjectManager Spawn Skill Failed {templateID}");
+				return null;
+			}
+
+			GameObject go = Managers.Resource.Instantiate(skillData.prefab, pooling: true);
+			go.transform.position = position;
+
+			T t = go.GetOrAddComponent<T>();
+			t.Init();
+
+			return t;
+		}
 		return null;
 	}
 	public void Despawn<T>(T obj) where T : BaseController
 	{
 		if (obj.IsValid() == false)
 		{
-
+			return;
 		}
 
 		System.Type type = typeof(T);
@@ -116,5 +131,11 @@ public class ObjectManager
 		}
 	}
 
+    public void DespawnAllMonsters()//보스시 드랍된 오브젝트 삭제 추가
+    {
+        var monsters = Monsters.ToList();
 
+        foreach (var monster in monsters)
+            Despawn<MonsterController>(monster);
+    }
 }

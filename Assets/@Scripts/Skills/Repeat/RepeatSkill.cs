@@ -29,7 +29,7 @@ public abstract class RepeatSkill : SkillBase
 		_coSkill = StartCoroutine(CoStartSkill());
 	}
 
-	protected abstract void DoSkillJob();
+	protected abstract void DoSkillJob();//Áö¼Óµô
 
 	protected virtual IEnumerator CoStartSkill()
 	{
