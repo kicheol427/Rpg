@@ -7,6 +7,8 @@ using UnityEngine;
 public class UI_GameScene : UI_Base
 {
     [SerializeField]
+    TextMeshProUGUI _coinCountText;
+    [SerializeField]
     TextMeshProUGUI _killCountText;
 
     [SerializeField]
@@ -20,5 +22,9 @@ public class UI_GameScene : UI_Base
     public void SetKillCount(int killCount)
     {
         _killCountText.text = $"{killCount}";//Àç·á·Î ¹Ù²Ü?
+    }
+    public void SetCoinCount(int coinCount)
+    {
+        _coinCountText.text = $"{coinCount}";//Àç·á·Î ¹Ù²Ü?
     }
 }

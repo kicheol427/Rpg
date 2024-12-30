@@ -67,5 +67,6 @@ public static class Define
 	public const int PLAYER_DATA_ID = 1;
 	public const string EXP_GEM_PREFAB = "EXPGem.prefab";
 
-	public const int EGO_SWORD_ID = 10;
+    public const int FIREBALL_ID = 11;
+    public const int EGO_SWORD_ID = 10;
 }

@@ -26,9 +26,14 @@ public class PlayerController : CreatureController
 
     public override bool Init()
     {
-        if(base.Init() == false) return false;
+        if(base.Init() == false)
+            return false;
+
         _speed = 5f;
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
+
+        //Skills.AddSkill<FireballSkill>(transform.position);
+        Skills.AddSkill<EgoSword>(_indicator.position);
 
         //StartProjectile();
         //StartEgoSword();
@@ -78,7 +83,7 @@ public class PlayerController : CreatureController
     }*/
     void CollectEnv()
     {
-        List<GemController> gems = Managers.Object.Gems.ToList();
+        List<GemController> gems = Managers.Object.Gems.ToList();//coinº¯°æ
 
         float sqrCollectDist = EnvCollectDist * EnvCollectDist;
 

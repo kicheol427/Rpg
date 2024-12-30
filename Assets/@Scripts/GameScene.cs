@@ -48,9 +48,9 @@ public class GameScene : MonoBehaviour
                     case Define.StageType.Boss:
                         _spawningPool.Stopped = true;
                         break;
-                    case Define.StageType.Home:
-                        _spawningPool.Stopped = true;
-                        break;
+                    //case Define.StageType.Home:
+                    //    _spawningPool.Stopped = true;
+                    //    break;
                 }
             }
         }

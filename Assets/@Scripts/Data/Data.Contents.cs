@@ -51,19 +51,35 @@ namespace Data
 		public int attack;
 		[XmlAttribute]
 		public float speed;
-		// DropData
-		// - 일정 확률로
-		// - 어떤 아이템을 (보석, 스킬 가차, 골드, 고기)
-		// - 몇 개 드랍할지?
+		[XmlAttribute]
+		public string type;
+        // DropData
+        // - 일정 확률로
+        // - 어떤 아이템을 (보석, 스킬 가차, 골드, 고기)
+        // - 몇 개 드랍할지?
 
+    }
+    
+	[Serializable, XmlRoot("MonsterDatas")]
+    public class MonsterDataLoader : ILoader<int, MonsterData>
+    {
+        [XmlElement("MonsterData")]
+        public List<MonsterData> stats = new List<MonsterData>();
 
-	}
+        public Dictionary<int, MonsterData> MakeDict()
+        {
+            Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
+            foreach (MonsterData stat in stats)
+                dict.Add(stat.attack, stat);
+            return dict;
+        }
+    }
 
-	#endregion
+    #endregion
 
-	#region SkillData
+    #region SkillData
 
-	[Serializable]
+    [Serializable]
 	public class HitEffect
 	{
 		[XmlAttribute]
@@ -79,18 +95,18 @@ namespace Data
 		[XmlAttribute]
 		public int templateID;
 
-		[XmlAttribute(AttributeName = "type")]
+		//[XmlAttribute(AttributeName = "type")]
 		//public string skillTypeStr;
-		public Define.SkillType skillType = Define.SkillType.None;
+		//public Define.SkillType skillType = Define.SkillType.None;
 
 		[XmlAttribute]
 		public int nextID;
-		public int prevID = 0; // TODO
+		public int prevID = 0;
 
 		[XmlAttribute]
 		public string prefab;
 
-		// 아주 많이
+		
 		[XmlAttribute]
 		public int damage;
 

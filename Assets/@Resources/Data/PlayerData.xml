@@ -2,8 +2,7 @@
 <PlayerDatas>
 	<PlayerData level="1" maxHp="100" attack="10" totalExp="100">
 	</PlayerData>
-	<PlayerData level="2" maxHp="200" attack="10" totalExp="100">
+	<PlayerData maxHp="100" attack="1" Speed="5">
 	</PlayerData>
-	<PlayerData level="3" maxHp="300" attack="10" totalExp="100">
-	</PlayerData>
+
 </PlayerDatas>

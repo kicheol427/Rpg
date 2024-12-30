@@ -9,7 +9,7 @@ public class GameManager
 
 	#region ÀçÈ­
 
-	public int Gold { get; set; }
+	public int Coin { get; set; }
 
 	int _gem = 0;
 

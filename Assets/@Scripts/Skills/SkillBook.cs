@@ -16,7 +16,7 @@ public class SkillBook : MonoBehaviour
     {
         System.Type type = typeof(T);
 
-		if (type == typeof(EgoSword))
+		if (type == typeof(EgoSword))//스폰하는 부분 넣기if안에
         {
 			var egoSword = Managers.Object.Spawn<EgoSword>(position, Define.EGO_SWORD_ID);
 			egoSword.transform.SetParent(parent);
@@ -35,7 +35,7 @@ public class SkillBook : MonoBehaviour
 
 			Skills.Add(fireball);
 			RepeatedSkills.Add(fireball);
-
+			//return null;
 			return fireball as T;
 		}
 		else if (type.IsSubclassOf(typeof(SequenceSkill)))

@@ -18,7 +18,7 @@ public class ProjectileController : SkillBase
     {
         base.Init();
 
-        StartDestroy(_lifeTime);
+        //StartDestroy(_lifeTime);
 
         return true;
     }

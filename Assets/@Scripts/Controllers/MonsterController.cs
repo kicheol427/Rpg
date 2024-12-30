@@ -105,18 +105,20 @@ public class MonsterController : CreatureController
 	Coroutine _coDotDamage;
 	public IEnumerator CoStartDotDamage(PlayerController target)
 	{
+		//int damage = Managers.Data.MonsterDic.;
 		while (true)
 		{
-			target.OnDamaged(this, 2);
+			target.OnDamaged(this, );
 
-			yield return new WaitForSeconds(0.1f);//0.1초 데미지
+			yield return new WaitForSeconds(1f);
 		}
 	}
 	protected override void OnDead()
 	{
 		base.OnDead();
 
-		Managers.Game.KillCount++; //킬 대신 돈으로 변경
+		Managers.Game.KillCount++;
+		Managers.Game.Coin++;
 
 		if (_coDotDamage != null)
 			StopCoroutine(_coDotDamage);

@@ -16,49 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 244804d531cf5db4e95a52766a547a74
-  m_SerializeEntries:
-  - m_GUID: e79bbd6d8778921498acfdbd56aff4ba
-    m_Address: Player.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc075a064dfda1a4f8304e2ff51e9615
-    m_Address: BossPrefab.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba4a3e96bc4dd77479cbdf6ffefebc56
-    m_Address: Map.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 22f9ececec65b824e82252a80b52f20f
-    m_Address: Goblin_01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6bae140147d6715439ec453b82824dbb
-    m_Address: Snake_01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2504cd57a75f290468d3dc082b868aa6
-    m_Address: EXPGem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 219bcfa775168ee40af7f51baeaaa88d
-    m_Address: '@Map.prefab'
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: af840e019e7cb2147802778ae5bc63aa, type: 2}
   m_SchemaSet:
