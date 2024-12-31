@@ -57,8 +57,13 @@ public static class Define
 		Idle,
 		Moving,
 		Skill,
+		OnDamaged,
 		Dead,
 	}
+
+	public static float KNOCKBACK_TIME = 0.1f;// 밀려나는시간
+	public static float KNOCKBACK_SPEED = 10;  // 속도 
+	public static float KNOCKBACK_COOLTIME = 0.5f;
 
 	public const int GOBLIN_ID = 1;
 	public const int SNAKE_ID = 2;

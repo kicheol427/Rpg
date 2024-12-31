@@ -6,6 +6,76 @@ using UnityEngine;
 
 namespace Data
 {
+    #region CreatureData
+	public class CreatureData
+    {
+		public int DataId;
+		public float MaxHp;
+		public float MaxHpBonus;
+		public float HpRate;
+		public float Atk;
+		public float AtkBonus;
+		public float AtkRate;
+		public float MoveSpeed;
+		public float MoveSpeedRate;
+	}
+	[Serializable]
+	public class CreatureDataLoader : ILoader<int, CreatureData>
+	{
+		public List<CreatureData> creatures = new List<CreatureData>();
+		public Dictionary<int, CreatureData> MakeDict()
+		{
+			Dictionary<int, CreatureData> dict = new Dictionary<int, CreatureData>();
+			foreach (CreatureData creature in creatures)
+				dict.Add(creature.DataId, creature);
+			return dict;
+		}
+	}
+
+	#endregion
+
+	#region StageData
+	[Serializable]
+	public class StageData
+	{
+		public int StageIndex = 1;
+		public string StageName;
+		public int StageLevel = 1;
+		public string MapName;
+		public int StageSkill;
+
+		public int FirstWaveCountValue;
+		public int FirstWaveClearRewardItemId;
+		public int FirstWaveClearRewardItemValue;
+
+		public int SecondWaveCountValue;
+		public int SecondWaveClearRewardItemId;
+		public int SecondWaveClearRewardItemValue;
+
+		public int ThirdWaveCountValue;
+		public int ThirdWaveClearRewardItemId;
+		public int ThirdWaveClearRewardItemValue;
+
+		public int ClearReward_Gold;
+		public int ClearReward_Exp;
+		public string StageImage;
+		public List<int> AppearingMonsters;
+		//public List<WaveData> WaveArray;
+	}
+	public class StageDataLoader : ILoader<int, StageData>
+	{
+		public List<StageData> stages = new List<StageData>();
+
+		public Dictionary<int, StageData> MakeDict()
+		{
+			Dictionary<int, StageData> dict = new Dictionary<int, StageData>();
+			foreach (StageData stage in stages)
+				dict.Add(stage.StageIndex, stage);
+			return dict;
+		}
+	}
+	#endregion
+
 	#region PlayerData
 	public class PlayerData
 	{

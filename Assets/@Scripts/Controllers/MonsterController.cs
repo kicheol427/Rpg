@@ -1,29 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 using static UnityEngine.GraphicsBuffer;
 
 public class MonsterController : CreatureController
 {
     #region State Pattern
 
-    Define.CreatureState _creatureState = Define.CreatureState.Moving;
-    public virtual Define.CreatureState CreatureState
-    {
-        get { return _creatureState; }
-        set
-        {
-            _creatureState = value;
-            UpdateAnimation();
-        }
-    }
-
+    
     protected Animator _animator;
-    public virtual void UpdateAnimation()
-    {
-
-    }
-
     public override void UpdateController()
     {
         base.UpdateController();
@@ -51,6 +38,7 @@ public class MonsterController : CreatureController
     protected virtual void UpdateDead() { }
 
     #endregion
+    public event Action<MonsterController> MonsterInfoUpdate;
     public override bool Init()
 	{
 		if (base.Init())
@@ -62,6 +50,7 @@ public class MonsterController : CreatureController
 
 		return true;
 	}
+    Vector3 _moveDir;
 
 	void FixedUpdate()
     {
@@ -71,13 +60,26 @@ public class MonsterController : CreatureController
 		if (pc == null)
 			return;
 		//몬스터 소환 - 콜리전 체크 후 플레이어와 접촉시 따라오는 걸로 변경& 콜리전 나오고 몬스터 위치 조정생각
-		Vector3 dir = pc.transform.position - transform.position;
-		Vector3 newPos = transform.position + dir.normalized * Time.deltaTime * _speed;
+		_moveDir = pc.transform.position - transform.position;
+		Vector3 newPos = transform.position + _moveDir.normalized * Time.deltaTime * MoveSpeed;
 		GetComponent<Rigidbody2D>().MovePosition(newPos);
 
-		GetComponent<SpriteRenderer>().flipX = dir.x > 0;
+		GetComponent<SpriteRenderer>().flipX = _moveDir.x > 0;
     }
-	private void OnCollisionEnter2D(Collision2D collision)
+    public override void OnDamaged(BaseController attacker, float damage = 0)
+    {
+        float totalDmg = Managers.Game.Player.Atk;
+        base.OnDamaged(attacker, totalDmg);
+        InvokeMonsterData();
+        if (ObjectType == ObjectType.Monster)
+        {
+            if (_coDotDamage == null)
+            {
+                _coDotDamage = StartCoroutine(CoStartDotDamage());
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
 	{
 		PlayerController target = collision.gameObject.GetComponent<PlayerController>();
         if (target.IsValid() == false)
@@ -87,7 +89,7 @@ public class MonsterController : CreatureController
 
         if (_coDotDamage != null)
 			StopCoroutine(_coDotDamage);
-		_coDotDamage = StartCoroutine(CoStartDotDamage(target));
+		_coDotDamage = StartCoroutine(CoStartDotDamage());
 	}
 
 	public void OnCollisionExit2D(Collision2D collision)
@@ -103,14 +105,22 @@ public class MonsterController : CreatureController
 		_coDotDamage = null;
 	}
 	Coroutine _coDotDamage;
-	public IEnumerator CoStartDotDamage(PlayerController target)
+	public IEnumerator CoStartDotDamage()
 	{
-		//int damage = Managers.Data.MonsterDic.;
-		while (true)
-		{
-			target.OnDamaged(this, );
+        float elapsed = 0;
+        CreatureState = CreatureState.OnDamaged;
 
-			yield return new WaitForSeconds(1f);
+        while (true)
+		{
+            elapsed += Time.deltaTime;
+            if (elapsed > KNOCKBACK_TIME)
+                break;
+
+            Vector3 dir = _moveDir * -1f;
+            Vector2 nextVec = dir.normalized * KNOCKBACK_SPEED * Time.fixedDeltaTime;
+            _rigidBody.MovePosition(_rigidBody.position + nextVec);
+
+            yield return null;
 		}
 	}
 	protected override void OnDead()
@@ -118,7 +128,6 @@ public class MonsterController : CreatureController
 		base.OnDead();
 
 		Managers.Game.KillCount++;
-		Managers.Game.Coin++;
 
 		if (_coDotDamage != null)
 			StopCoroutine(_coDotDamage);
@@ -128,4 +137,11 @@ public class MonsterController : CreatureController
 
 		Managers.Object.Despawn(this);//오브젝트 삭제
 	}
+    public void InvokeMonsterData()
+    {
+        if (this.IsValid() && gameObject.IsValid() && ObjectType != ObjectType.Monster)
+        {
+            MonsterInfoUpdate?.Invoke(this);
+        }
+    }
 }

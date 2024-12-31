@@ -1,8 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
+
+[Serializable]
+public class PlayerStat
+{
+    public int DataId;
+    public float Hp;
+    public float MaxHp;
+    public float Atk;
+    public float MoveSpeed;
+}
 public class PlayerController : CreatureController
 {
     Vector2 _moveDir = Vector2.zero;
@@ -17,19 +28,48 @@ public class PlayerController : CreatureController
     public Transform Indicator { get { return _indicator; } }
     public Vector3 FireSocket { get { return _fireSocket.position; } }
     public Vector3 ShootDir { get { return (_fireSocket.position - _indicator.position).normalized;} }
+    public PlayerStat Stat = new PlayerStat();
 
-    public Vector2 vector2
+    #region Stat
+    public override float Hp
+    {
+        get { return Managers.Game.AbilityInfo.Hp; }
+        set
+        {
+            if (value > MaxHp)
+                Managers.Game.AbilityInfo.Hp = Stat.Hp = MaxHp;
+            else
+                Managers.Game.AbilityInfo.Hp = Stat.Hp = value;
+        }
+    }
+    public override float MaxHp
+    {
+        get { return Managers.Game.AbilityInfo.MaxHp; }
+        set { Managers.Game.AbilityInfo.MaxHp = Stat.MaxHp = value; }
+    }
+    public override float Atk
+    {
+        get { return Managers.Game.AbilityInfo.Atk; }
+        set { Managers.Game.AbilityInfo.Atk = Stat.Atk = value; }
+    }
+    public override float MoveSpeed
+    {
+        get { return Managers.Game.AbilityInfo.MoveSpeed; }
+        set { Managers.Game.AbilityInfo.MoveSpeed = Stat.MoveSpeed = value; }
+    }
+    public Vector2 MoveDir
     {
         get { return _moveDir; }
         set { _moveDir = value.normalized; }
     }
+
+    #endregion
 
     public override bool Init()
     {
         if(base.Init() == false)
             return false;
 
-        _speed = 5f;
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
 
         //Skills.AddSkill<FireballSkill>(transform.position);
@@ -58,7 +98,7 @@ public class PlayerController : CreatureController
 
     void MovePlayer()
     {
-        Vector3 dir = _moveDir * _speed * Time.deltaTime; ;
+        Vector3 dir = _moveDir * MoveSpeed * Time.deltaTime; ;
         transform.position += dir;
 
         if (_moveDir != Vector2.zero)
@@ -110,14 +150,33 @@ public class PlayerController : CreatureController
             return;
 
     }
-    public override void OnDamaged(BaseController attacker, int damage)
+    public override void OnDamaged(BaseController attacker, float damage)
     {
-        base.OnDamaged(attacker, damage);
+        float totalDamage = 0;
+        CreatureController cc = attacker as CreatureController;
+        if (cc != null)
+        {
+            totalDamage = cc.Atk;
+        }
+        
+        base.OnDamaged(attacker, totalDamage);
 
         Debug.Log($"OnDamaged ! {Hp}");
-
-        // TEMP 반사뎀.수정필요
-        CreatureController cc = attacker as CreatureController;
-        cc?.OnDamaged(this, 10000);
     }
+    public override void InitCreatureStat(bool isFullHp = true)
+    {
+        // 현재 케릭터의 Stat 가져오기
+        MaxHp = Managers.Game.AbilityInfo.MaxHp;
+        Atk = Managers.Game.AbilityInfo.Atk;
+        MoveSpeed = CreatureData.MoveSpeed * CreatureData.MoveSpeedRate;
+
+
+        MaxHp *= MaxHpBonusRate;
+        Atk *= AttackRate;
+        MoveSpeed *= MoveSpeedRate;
+
+        if (isFullHp == true)
+            Hp = MaxHp;
+    }
+
 }

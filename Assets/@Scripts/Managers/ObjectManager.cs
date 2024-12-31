@@ -138,4 +138,14 @@ public class ObjectManager
         foreach (var monster in monsters)
             Despawn<MonsterController>(monster);
     }
+
+	public void ShowDamageFont(Vector2 pos, float damage, float healAmount, Transform parent)
+	{
+		string prefabName = "DamageFont";
+
+
+		GameObject go = Managers.Resource.Instantiate(prefabName, pooling: true);
+		//DamageFont damageText = go.GetOrAddComponent<DamageFont>();
+		//damageText.SetInfo(pos, damage, healAmount, parent);
+	}
 }
