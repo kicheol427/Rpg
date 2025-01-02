@@ -140,7 +140,7 @@ namespace Data
         {
             Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
             foreach (MonsterData stat in stats)
-                dict.Add(stat.attack, stat);
+                dict.Add(stat.level, stat);
             return dict;
         }
     }
