@@ -9,19 +9,32 @@ namespace Data
     #region CreatureData
 	public class CreatureData
     {
-		public int DataId;
-		public string Name;
-		public string Prefab;
-		public int Level;
-		public float MaxHp;
-		public float MaxHpBonus;
-		public float HpRate;
-		public float Atk;
-		public float AtkBonus;
-		public float AtkRate;
-		public float MoveSpeed;
-		public float MoveSpeedRate;
-		public string Type;
+        [XmlAttribute]
+        public int DataId;
+        [XmlAttribute]
+        public string Name;
+        [XmlAttribute]
+        public string Prefab;
+        [XmlAttribute]
+        public int Level;
+        [XmlAttribute]
+        public float MaxHp;
+        [XmlAttribute]
+        public float MaxHpBonus;
+        [XmlAttribute]
+        public float HpRate;
+        [XmlAttribute]
+        public float Atk;
+        [XmlAttribute]
+        public float AtkBonus;
+        [XmlAttribute]
+        public float AtkRate;
+        [XmlAttribute]
+        public float MoveSpeed;
+        [XmlAttribute]
+        public float MoveSpeedRate;
+        [XmlAttribute]
+        public string Type;
 	}
 	[Serializable]
 	public class CreatureDataLoader : ILoader<int, CreatureData>
