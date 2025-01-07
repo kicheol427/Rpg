@@ -2,6 +2,7 @@ using Data;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using UnityEngine;
 using static Define;
 
@@ -10,6 +11,7 @@ public abstract class CreatureController : BaseController
     public CreatureData CreatureData;
 
     protected bool isPlayDamagedAnim = false;
+    public virtual int DataId { get; set; }
     public virtual float MoveSpeed { get; set; }
     public virtual float Hp { get; set; }
     public virtual float MaxHp { get; set; }
@@ -37,6 +39,10 @@ public abstract class CreatureController : BaseController
             UpdateAnimation();
         }
     }
+    void Awake()
+    {
+        Init();
+    }
     public virtual void InitCreatureStat(bool isFullHp = true)
     {
         float stageRate = Managers.Game.CurrentStageData.StageLevel;
@@ -49,6 +55,7 @@ public abstract class CreatureController : BaseController
 
     public void SetInfo(int creatureId)
     {
+        DataId = creatureId;
         Dictionary<int, Data.CreatureData> dict = Managers.Data.CreatureDic;
         CreatureData = dict[creatureId];
         InitCreatureStat();

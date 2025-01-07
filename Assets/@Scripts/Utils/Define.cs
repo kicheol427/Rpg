@@ -33,7 +33,8 @@ public static class Define
 		Player,
 		Monster,
 		Projectile,
-		Env
+		Env,
+		Boss
 	}
 
 	public enum SkillType

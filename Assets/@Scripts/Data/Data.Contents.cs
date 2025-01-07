@@ -10,6 +10,9 @@ namespace Data
 	public class CreatureData
     {
 		public int DataId;
+		public string Name;
+		public string Prefab;
+		public int Level;
 		public float MaxHp;
 		public float MaxHpBonus;
 		public float HpRate;
@@ -18,6 +21,7 @@ namespace Data
 		public float AtkRate;
 		public float MoveSpeed;
 		public float MoveSpeedRate;
+		public string Type;
 	}
 	[Serializable]
 	public class CreatureDataLoader : ILoader<int, CreatureData>
@@ -105,7 +109,7 @@ namespace Data
 	}
 	#endregion
 
-	#region MonsterData
+	/*#region MonsterData
 
 	public class MonsterData
 	{
@@ -145,7 +149,7 @@ namespace Data
         }
     }
 
-    #endregion
+    #endregion*/
 
     #region SkillData
 

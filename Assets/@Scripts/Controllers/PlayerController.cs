@@ -31,6 +31,11 @@ public class PlayerController : CreatureController
     public PlayerStat Stat = new PlayerStat();
 
     #region Stat
+    public override int DataId
+    {
+        get { return Managers.Game.AbilityInfo.PlayerDataId; }
+        set { Managers.Game.AbilityInfo.PlayerDataId = Stat.DataId = value; }
+    }
     public override float Hp
     {
         get { return Managers.Game.AbilityInfo.Hp; }
@@ -69,6 +74,8 @@ public class PlayerController : CreatureController
     {
         if(base.Init() == false)
             return false;
+
+        ObjectType = Define.ObjectType.Player;
 
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
 

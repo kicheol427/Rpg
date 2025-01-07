@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CreatureDatas>
-	<CreatureData DataId="" MaxHp="" MaxHpBonus="" HpRate="" Atk="" AtkBonus="" AtkRate="" MoveSpeed="" MoveSpeedRate="">
+	<CreatureData DataId="2010"
+				  Name="Player"
+				  Prefab="Player"
+				  Level="1"
+				  MaxHp="100" 
+				  MaxHpBonus="4" 
+				  HpRate="4" 
+				  Atk="1" 
+				  AtkBonus="4" 
+				  AtkRate="4" 
+				  MoveSpeed="5" 
+				  MoveSpeedRate="4"
+				  Type ="player">
 	</CreatureData>
-
+	<CreatureData DataId="2020"
+				  Name="Snake"
+				  Prefab="Snake_01"
+				  Level="1" 
+				  MaxHp="50"
+				  MaxHpBonus="4"
+				  HpRate="4" 
+				  Atk="10"
+				  AtkBonus="4" 
+				  AtkRate="4"
+				  MoveSpeed="3"
+				  MoveSpeedRate="4"
+				  Type =" enemy">
+	</CreatureData>
+	<CreatureData DataId="2021"
+				  Name="Goblin"
+				  Prefab="Goblin_01"
+				  Level="1"
+				  MaxHp="50"
+				  MaxHpBonus="4" 
+				  HpRate="4" 
+				  Atk="10" 
+				  AtkBonus="4"
+				  AtkRate="4"
+				  MoveSpeed="3" 
+				  MoveSpeedRate="4"
+				  Type =" enemy">
+	</CreatureData>
+<!--'4'는 수정필요-->
 </CreatureDatas>

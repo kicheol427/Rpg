@@ -39,6 +39,11 @@ public class MonsterController : CreatureController
 
     #endregion
     public event Action<MonsterController> MonsterInfoUpdate;
+    private void OnEnable()
+    {
+        if (DataId != 0)
+            SetInfo(DataId);
+    }
     public override bool Init()
 	{
 		if (base.Init())

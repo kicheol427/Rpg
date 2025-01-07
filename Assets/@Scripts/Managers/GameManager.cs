@@ -16,9 +16,12 @@ public class GameData
 
 	public AbilityData AbilityInfo = new AbilityData();
 	public StageData CurrentStage = new StageData();
+	public List<Character> Characters = new List<Character>();
 }
 public class AbilityData
 {
+	public int PlayerDataId;
+	public int Level;
 	public float Hp;
 	public float MaxHp;
 	public float Atk;
@@ -51,9 +54,17 @@ public class GameManager
 		get { return _gameData.CurrentStage; }
 		set { _gameData.CurrentStage = value; }
 	}
-	#region 재화
+	public List<Character> Characters
+    {
+        get { return _gameData.Characters; }
+        set
+        {
+			_gameData.Characters = value;
+        }
+    }
+    #region 재화
 
-	public event Action<int> OnGemCountChanged;
+    public event Action<int> OnGemCountChanged;
 	public int Gem
 	{
 		get { return _gameData.Gem; }
